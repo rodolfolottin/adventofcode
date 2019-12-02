@@ -1,5 +1,5 @@
 def read_input():
-    with open(f"2019/one_input.txt") as f:
+    with open("2019/d01/one_input.txt") as f:
         return list(map(int, f))
 
 
