@@ -46,12 +46,33 @@ def process_program(program):
     return program
 
 
+def possible_inputs():
+    return [(x, y) for x in range(100) for y in range(100)]
+
+
+def process_program_two(program):
+    for first_elem, second_elem in possible_inputs():
+        new_program = list(program)
+
+        new_program[1] = first_elem
+        new_program[2] = second_elem
+
+        final = process_program(new_program)
+
+        if final[0] == 19690720:
+            return first_elem, second_elem
+
+
 if __name__ == "__main__":
     print("Day 2 exercise...")
 
     input_content = read_input()
     program = pre_process(input_content)
 
-    processed_program = process_program(program)
+    processed_program = process_program(list(program))
 
     print(f"Part 1: {processed_program[0]}")
+
+    processed_program = process_program_two(list(program))
+
+    print(f"Part 2: {100 * processed_program[0] + processed_program[1]}")
