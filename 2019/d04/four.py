@@ -1,14 +1,10 @@
-def numbers():
-    yield from range(109165, 576723)
-
-
-def different_passwords():
-    for number in numbers():
-        yield from match_criterias(str(number))
+def possible_passwords():
+    for number in range(109165, 576723):
+        yield match_criterias(number)
 
 
 def match_criterias(number):
-    reversed_number = number[::-1]
+    reversed_number = str(number)[::-1]
 
     never_decrease = all(
         elem >= reversed_number[ind + 1]
@@ -22,15 +18,10 @@ def match_criterias(number):
         if ind + 1 < len(reversed_number)
     )
 
-    if never_decrease and two_adjacent_digts_are_the_same:
-        yield number
-
-
-def match_criteria(number):
-    return bool(next((pwd for pwd in match_criterias(number)), False))
+    return never_decrease and two_adjacent_digts_are_the_same
 
 
 if __name__ == "__main__":
     print("Day 4 exercise...")
 
-    print(sum(1 for _ in different_passwords()))
+    print(sum(1 for _ in possible_passwords()))
