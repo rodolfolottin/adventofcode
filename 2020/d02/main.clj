@@ -8,8 +8,8 @@
 (defn str->int [str] (read-string str))
 
 (defn valid-password? [data]
-  (let [[_ low high char string] (re-find #"(\d*)-(\d*) (\w): (\w*)" data)
-        occurrences (count (filter (fn [x] (= char x)) (str/split string #"")))]
+  (let [[_ low high chr string] (re-find #"(\d*)-(\d*) (\w): (\w*)" data)
+        occurrences (count (filter (fn [x] (= chr x)) (str/split string #"")))]
     (and (<= (str->int low) occurrences) (>= (str->int high) occurrences))))
 
 (def part-1
