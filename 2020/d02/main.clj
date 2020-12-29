@@ -7,14 +7,14 @@
 
 (defn str->int [str] (read-string str))
 
-(defn valid-password? [data]
+(defn part-1-valid-password? [data]
   (let [[_ low high chr string] (re-find #"(\d*)-(\d*) (\w): (\w*)" data)
         occurrences (count (filter (fn [x] (= chr x)) (str/split string #"")))]
     (and (<= (str->int low) occurrences) (>= (str->int high) occurrences))))
 
-(def part-1
+(defn solve [valid-password-func]
   (->> read-lines
-       (filter valid-password?)
+       (filter valid-password-func)
        (count)))
 
-(println "Part 1 solution" part-1)
+(println "Part 1 solution" (solve part-1-valid-password?))
